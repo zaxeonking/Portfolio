@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProjectById } from '../../../lib/redis';
+import { getPreviewUrl } from '../../../lib/preview';
 import Footer from '../../../components/Footer';
 
 export const revalidate = 0;
@@ -41,12 +42,12 @@ export default async function ProjectDetailPage({ params }) {
             {project.title}
           </h1>
 
-          {project.imageUrl && (
+          {getPreviewUrl(project.link) && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={project.imageUrl}
+              src={getPreviewUrl(project.link)}
               alt={project.title}
-              className="mb-6 w-full rounded-lg border border-line object-cover"
+              className="mb-6 w-full rounded-lg border border-line object-cover object-top"
             />
           )}
 
